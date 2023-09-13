@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Courses</h2>
+
+<table id="employees">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+  </tr>
+</table>
+
+<script>
+
+(function(window, document, undefined) {
+
+// code that should be taken care of right away
+
+window.onload = init;
+
+function init(){
+  // the code to be called when the dom has loaded
+  // #document has its nodes
+  let employeeList = [];
+  var table = document.getElementById("employees");
+  console.log(table);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "http://localhost:4000/get");
+  xhr.send();
+  xhr.responseType = "json";
+  xhr.onload = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      employeeList = xhr.response;
+      // console.log(employeeList);
+      // employeeList = [{"id":4,"name":"course1"},{"id":27,"name":"course2"},{"id":3,"name":"course3"}];
+      console.log(employeeList);
+      
+      employeeList.forEach(addCourseRow);
+      
+    } else {
+      console.log(`Error: ${xhr.status}`);
+    }
+  };
+
+
+  function addCourseRow(item)
+  {
+      // console.log(item);
+      var row = table.insertRow(-1);
+      // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+      var cell1 = row.insertCell(0);
+      var cell2 = row.insertCell(1);
+
+      // Add some text to the new cells:
+      cell1.innerHTML = item["id"];
+      
+      cell2.innerHTML = item["name"]; 
+  }
+}
+
+})(window, document, undefined);
+</script>
+
+</body>
+</html>
+

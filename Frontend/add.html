@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data</title>
+  <style>
+    /* Center the form and create a margin line */
+.container {
+  width: 40%;
+  margin: 0 auto;
+  border: 3 
+  px solid #ccc; /* Margin line on the right */
+  padding: 20px; /* Add some padding for spacing */
+}
+
+/* Style the form elements */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+}
+
+input[type="number"],
+input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+/* Style the submit button in the bottom right corner */
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+input[type="submit"] {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Add some hover effect to the submit button */
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+  </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Welcome to Employee Management System</h1>
+    <div class="container">
+  <form name="input" action="">
+     <label >Id:</label>
+     <input type="number" >
+     <br><br>
+     <label >Name:</label>
+     <input type="text" >
+     <br><br>
+     <label >Salary:</label>
+     <input type="number">
+     <br><br>
+     <label >Dept_name:</label>
+     <input type="text" >
+     <br><br>
+     <label >Dept_code:</label>
+     <input type="number">
+     <br><br>
+  <div class="button">
+    <input type="submit" required>
+  </div>
+  </form>
+  
+
+</div>
+</body>
+</html>
