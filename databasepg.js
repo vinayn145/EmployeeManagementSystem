@@ -40,14 +40,5 @@ app.get('/employee', async (req, res) => {
     console.log(`Server is running on port ${port}`);
   }); 
 
-let data=client.query(`Select * from employee_details`, (err, res) =>{
-    if(!err){
-        console.log(res.rows);
-    } else{
-        console.log(err.message);
-    }
-    client.end;
-})
-
 //export to another file
 module.exports = client
