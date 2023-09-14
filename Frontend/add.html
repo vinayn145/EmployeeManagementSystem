@@ -50,9 +50,23 @@ tr:nth-child(even) {
     <a href="index.html">Home</a>
     <a href="view.html">View</a>
     <a class="active" href="#add">Add</a>
-  </div>
-
-  
+          </div>
+            <h1>Employee Details</h1>
+                Id:<br>
+                <input type="number" name="id" id="id">
+                <br>
+                Name:<br>
+                <input type="text" name="name" id="name">
+                <br><br>
+                Salary:<br>
+                <input type="number" name="salary" id="salary">
+                <br><br>
+                Dept_code:<br>
+                <input type="number" name="dept_code" id="dept_code">
+                <br><br>
+                <button id="submitBtn">Submit</button>
+          </body>
+          </html>
 
 <script>
 
@@ -65,7 +79,35 @@ window.onload = init;
 function init(){
   // the code to be called when the dom has loaded
   // #document has its nodes
-  
+
+  function addEmployee(id, name, salary, dept_code)
+  {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:4000/add", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    var data = JSON.stringify({"id": id, "name": name, "salary": salary, "dept_code": dept_code});
+    console.log(data);
+    xhr.send(data);
+
+    xhr.onreadystatechange = (e) => {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+        window.alert("Add successful");
+        location.reload();
+      } else {
+        console.log(`Error: ${xhr.status}`);
+      }
+    }
+  }
+
+  let submitBtn = document.getElementById("submitBtn");
+
+  submitBtn.addEventListener('click', function(event) {
+        let id = document.getElementById("id").value;
+        let name = document.getElementById("name").value;
+        let salary = document.getElementById("salary").value;
+        let dept_code = document.getElementById("dept_code").value;
+        addEmployee(id, name, salary, dept_code);
+      });
 }
 })(window, document, undefined);
 </script>

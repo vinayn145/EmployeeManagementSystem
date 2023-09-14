@@ -69,8 +69,19 @@ tr:nth-child(even) {
 
 function deleteEmployee(id)
 {
-  console.log(id);
-
+  // console.log(id);
+  const xhr = new XMLHttpRequest();
+  xhr.open("DELETE", `http://localhost:4000/delete/${id}`);
+  xhr.send();
+  xhr.responseType = "json";
+  xhr.onload = () => {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      window.alert("Delete successful");
+      location.reload();
+    } else {
+      console.log(`Error: ${xhr.status}`);
+    }
+  };
 };
 
 window.onload = init;
