@@ -50,6 +50,7 @@ tr:nth-child(even) {
   background-color: #04AA6D;
   color: white;
 }
+
 </style>
 </head>
 <body>
@@ -61,44 +62,47 @@ tr:nth-child(even) {
     <a class="active" href="#add">Add</a>
   </div>
 
-  <h1>Employee Details</h1>
-    <div class="form-group">
-        <label class="col-lg-1 control-label">Id:</label>
-        <div class="col-lg-3">
-            <input class="form-control" type="number" name="id" id="id" value="">
-        </div>
-    </div>
+    <h1 style="margin-left: 10px;">Add Employee Details</h1>
     <br>
-    <br>
-    <div class="form-group">
-        <label class="col-lg-1 control-label">Name:</label>
-        <div class="col-lg-3">
-            <input class="form-control" type="text" name="name" id="name" value="">
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="form-group">
-        <label class="col-lg-1 control-label">Salary:</label>
-        <div class="col-lg-3">
-            <input class="form-control" type="number" name="salary" id="salary" value="">
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="form-group">
-        <label class="col-lg-1 control-label">Dept. Code:</label>
-        <div class="col-lg-3">
-            <input class="form-control" type="number" name="dept_code" id="dept_code" value="">
-        </div>
+   <div class="form">
+      <div class="form-group">
+          <label class="col-lg-1 control-label">Id:</label>
+          <div class="col-lg-3">
+              <input class="form-control" type="number" name="id" id="id" value="">
+          </div>
+      </div>
+      <br>
+      <br>
+      <div class="form-group">
+          <label class="col-lg-1 control-label">Name:</label>
+          <div class="col-lg-3">
+              <input class="form-control" type="text" name="name" id="name" value="">
+          </div>
+      </div>
+      <br>
+      <br>
+      <div class="form-group">
+          <label class="col-lg-1 control-label">Salary:</label>
+          <div class="col-lg-3">
+              <input class="form-control" type="number" name="salary" id="salary" value="">
+          </div>
+      </div>
+      <br>
+      <br>
+      <div class="form-group">
+          <label class="col-lg-1 control-label">Dept. Code:</label>
+          <div class="col-lg-3">
+              <input class="form-control" type="number" name="dept_code" id="dept_code" value="">
+          </div>
     </div>
     <br><br>
     <div class="form-group">
         <label class="col-lg-3 control-label"></label>
         <div class="col-lg-1">
-            <button type="button" class="btn btn-success float-right" id="submitBtn">Submit</button>
+            <button type="button" style="margin-left:-200px" class="btn btn-success float-right" id="submitBtn">Submit</button>
         </div>
     </div>
+  </div>
 </body>
 </html>
 
@@ -112,7 +116,7 @@ window.onload = init;
 
 function init(){
   // the code to be called when the dom has loaded
-  // #document has its nodes
+  // #document has its nodes  
 
   function addEmployee(id, name, salary, dept_code)
   {

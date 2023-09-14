@@ -43,7 +43,8 @@
         <a href="view.html">View</a>
         <a href="add.html">Add</a>
     </div>
-    <h1>Employee Details</h1>
+    <h1 style="margin-left: 15px;">Employee Details</h1>
+    <br>
     <div class="form-group">
         <label class="col-lg-1 control-label">Id:</label>
         <div class="col-lg-3">
@@ -78,7 +79,8 @@
     <div class="form-group">
         <label class="col-lg-3 control-label"></label>
         <div class="col-lg-1">
-            <button type="button" class="btn btn-primary float-right" id="submitBtn">Submit</button>
+            <button type="button" style="margin-left:-170px;"
+            class="btn btn-primary float-right" id="submitBtn">Submit</button>
         </div>
     </div>
 </body>
@@ -109,7 +111,7 @@ function init(){
     xhr.onload = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
             employeeDetails = xhr.response;
-            // console.log(employeeDetails);
+            console.log(employeeDetails);
             if(employeeDetails != null && employeeDetails.length == 1)
             {
                 document.getElementById("id").value = employee_id;

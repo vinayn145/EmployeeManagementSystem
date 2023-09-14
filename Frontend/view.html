@@ -1,60 +1,64 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <head>
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<style>
-.topnav {
-  overflow: hidden;
-  background-color: #333;
-}
+      <style>
 
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
+      .topnav {
+        overflow: hidden;
+        background-color: #333;
+      }
 
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-}
+      .action-button {
+        margin-right: 8px; /* Adjust the margin to your preference */
+      }
 
-.topnav a.active {
-  background-color: #04AA6D;
-  color: white;
-}
-</style>
-</head>
-<body>
+      .topnav a {
+        float: left;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
 
+      .topnav a:hover {
+        background-color: #ddd;
+        color: black;
+      }
 
+      .topnav a.active {
+        background-color: #04AA6D;
+        color: white;
+      }
+      </style>
+  </head>
+ <body>
   <div class="topnav">
     <a href="index.html">Home</a>
     <a class="active" href="#view">View</a>
     <a href="add.html">Add</a>
   </div>
-  <div class="col-lg-4">
-    <table class="table table-striped" id="employees">
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Salary</th>
-        <th>Department</th>
-        <th class="text-center">Actions</th>
-      </tr>
-    </table>
-  </div>
+  <h1 style="padding-left: 20px;">Employee Data Lists</h1>
+    <div class="col-lg-4">
+      <table class="table table-striped" id="employees">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>Department</th>
+            <th class="text-center">Actions</th>
+          </tr>
+      </table>
+    </div>
 <script>
 
 (function(window, document, undefined) {
@@ -140,7 +144,7 @@ function init(){
       
       var btn = document.createElement('input');
       btn.type = "button";
-      btn.className = "btn btn-warning";
+      btn.className = "btn btn-warning action-button";
       btn.value = "Edit";
       btn.addEventListener('click', function(event) {
         window.location.href = `edit.html?id=${item["id"]}`;
@@ -148,9 +152,8 @@ function init(){
       cell5.appendChild(btn);
 
       var btn = document.createElement('button');
-      btn.className = "btn btn-danger";
-      btn.innerHTML = "Delete";
-      // btn.onclick = deleteEmployee(item["id"]);
+      btn.className = "btn btn-danger action-button";
+      btn.innerHTML = "Delete";     
       btn.addEventListener('click', function(event) {
         deleteEmployee(item["id"]);
       });
