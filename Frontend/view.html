@@ -1,23 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
 .topnav {
   overflow: hidden;
   background-color: #333;
@@ -51,16 +44,17 @@ tr:nth-child(even) {
     <a class="active" href="#view">View</a>
     <a href="add.html">Add</a>
   </div>
-
-  <table id="employees">
-    <tr>
-      <th>ID</th>
-      <th>Name</th>
-      <th>Salary</th>
-      <th>Department</th>
-      <th colspan="2">Actions</th>
-    </tr>
-  </table>
+  <div class="col-lg-4">
+    <table class="table table-striped" id="employees">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Salary</th>
+        <th>Department</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </table>
+  </div>
 <script>
 
 (function(window, document, undefined) {
@@ -117,7 +111,6 @@ function init(){
       var cell3 = row.insertCell(2);
       var cell4 = row.insertCell(3);
       var cell5 = row.insertCell(4);
-      var cell6 = row.insertCell(5);
 
       // Add some text to the new cells:
       cell1.innerHTML = item["id"];
@@ -147,19 +140,21 @@ function init(){
       
       var btn = document.createElement('input');
       btn.type = "button";
-      btn.className = "btn";
+      btn.className = "btn btn-warning";
       btn.value = "Edit";
-      // btn.onclick = ;
+      btn.addEventListener('click', function(event) {
+        window.location.href = `edit.html?id=${item["id"]}`;
+      });
       cell5.appendChild(btn);
 
       var btn = document.createElement('button');
-      btn.className = "btn";
+      btn.className = "btn btn-danger";
       btn.innerHTML = "Delete";
       // btn.onclick = deleteEmployee(item["id"]);
       btn.addEventListener('click', function(event) {
         deleteEmployee(item["id"]);
       });
-      cell6.appendChild(btn);
+      cell5.appendChild(btn);
   }
 }
 })(window, document, undefined);

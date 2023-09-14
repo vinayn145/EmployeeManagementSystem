@@ -74,6 +74,23 @@ app.post('/add', (req, response) => {
      });
 });
 
+//Editing new row
+app.post('/edit/:id', (req, response) => {
+    // console.log(req.body);
+    // console.log(req.params.id);
+    let {id, name, salary, dept_code} = req.body;
+    let updateQuery = `UPDATE employee_details SET name='${name}', salary=${salary}, dept_code=${dept_code} 
+        WHERE id= ${req.params.id}`;
+    console.log(updateQuery);
+    client.query(updateQuery, (err,res)=>{
+        if(!err){
+            response.send('Updated data successfully!');
+        }else{
+            response.send(err.message);
+        }
+    });
+});
+
 //Deleting by Id
 app.delete('/delete/:id', async(req, response)=>{
     let deleteQuery = `Delete from employee_details where id=${req.params.id}`;

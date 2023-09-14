@@ -1,32 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
 .topnav {
   overflow: hidden;
   background-color: #333;
@@ -55,17 +38,16 @@ tr:nth-child(even) {
 <body>
 
 
-  <div class="topnav">
-    <a href="index.html">Home</a>
-    <a href="view.html">View</a>
-    <a class="active" href="#add">Add</a>
-  </div>
-
-  <h1>Employee Details</h1>
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a href="view.html">View</a>
+        <a href="add.html">Add</a>
+    </div>
+    <h1>Employee Details</h1>
     <div class="form-group">
         <label class="col-lg-1 control-label">Id:</label>
         <div class="col-lg-3">
-            <input class="form-control" type="number" name="id" id="id" value="">
+            <input class="form-control" disabled type="number" name="id" id="id" value="">
         </div>
     </div>
     <br>
@@ -96,7 +78,7 @@ tr:nth-child(even) {
     <div class="form-group">
         <label class="col-lg-3 control-label"></label>
         <div class="col-lg-1">
-            <button type="button" class="btn btn-success float-right" id="submitBtn">Submit</button>
+            <button type="button" class="btn btn-primary float-right" id="submitBtn">Submit</button>
         </div>
     </div>
 </body>
@@ -114,18 +96,45 @@ function init(){
   // the code to be called when the dom has loaded
   // #document has its nodes
 
-  function addEmployee(id, name, salary, dept_code)
-  {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const employee_id = urlParams.get('id')
+    // console.log(employee_id);
+    let employeeDetails = null;
+
     const xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:4000/add", true);
+    xhr.open("GET", `http://localhost:4000/get/${employee_id}`);
+    xhr.send();
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            employeeDetails = xhr.response;
+            // console.log(employeeDetails);
+            if(employeeDetails != null && employeeDetails.length == 1)
+            {
+                document.getElementById("id").value = employee_id;
+                document.getElementById("name").value = employeeDetails[0]["name"];
+                document.getElementById("salary").value = employeeDetails[0]["salary"];
+                document.getElementById("dept_code").value = employeeDetails[0]["dept_code"];
+            }
+        } else {
+            console.log(`Error: ${xhr.status}`);
+        }
+    };
+ 
+    
+  
+  function editEmployee(id, name, salary, dept_code)
+  { 
+    xhr.open("POST", `http://localhost:4000/edit/${id}`, true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    var data = JSON.stringify({"id": id, "name": name, "salary": salary, "dept_code": dept_code});
+    var data = JSON.stringify({"name": name, "salary": salary, "dept_code": dept_code});
     console.log(data);
     xhr.send(data);
 
     xhr.onreadystatechange = (e) => {
       if (xhr.readyState == 4 && xhr.status == 200) {
-        window.alert("Add successful");
+        window.alert("Edit successful");
         location.reload();
       } else {
         console.log(`Error: ${xhr.status}`);
@@ -140,7 +149,7 @@ function init(){
         let name = document.getElementById("name").value;
         let salary = document.getElementById("salary").value;
         let dept_code = document.getElementById("dept_code").value;
-        addEmployee(id, name, salary, dept_code);
+        editEmployee(id, name, salary, dept_code);
       });
 }
 })(window, document, undefined);
@@ -148,4 +157,3 @@ function init(){
 
 </body>
 </html>
-
